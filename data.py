@@ -1,5 +1,3 @@
-# data.py
-
 class Urls:
     DOSKA_URL = "https://qa-desk.stand.praktikum-services.ru/"
 
@@ -28,3 +26,8 @@ class TestDATA:
     # чтобы не переписывать уже написанные тесты
     EXISTING_EMAIL = LOGIN_EMAIL
     EXISTING_PASSWORD = LOGIN_PASSWORD
+    # Ожидаемый текст для модалки размещения объявления
+    PLACE_AD_LOGIN_MODAL_TITLE = "Чтобы разместить объявление, авторизуйтесь"
+
+    # Имя пользователя, которое отображается в шапке
+    USER_NAME = "User"

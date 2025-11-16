@@ -169,10 +169,62 @@ class Locators:
         "//button[normalize-space()='Опубликовать']"
     )
 
-    # Ссылка на профиль пользователя в шапке
-    USER_PROFILE_LINK = (
+    # Заголовок объявления в блоке "Мои объявления"
+    USER_AD_CARD_TITLE = (
         By.XPATH,
-        "//a[normalize-space()='Профиль' or contains(normalize-space(),'Профиль')]"
+        "//section[contains(.,'Мои объявления')]//h3"
+    )
+    
+    # Имя пользователя "User" в шапке рядом с аватаркой
+    HEADER_USER_NAME = (
+        By.XPATH,
+        "//*[normalize-space()='User']"
+    )
+    
+    # Кнопка "Выйти" в шапке после авторизации
+    LOGOUT_BUTTON = (
+        By.XPATH,
+        "//button[normalize-space()='Выйти']"
+    )
+
+        # Дропдаун "Категория" в форме создания объявления
+        # Дропдаун "Категория" в форме объявления
+    AD_CATEGORY_DROPDOWN = (
+        By.XPATH,
+        "("
+        # 1) Любой select рядом с текстом "Категория"
+        "//*[contains(normalize-space(),'Категория')]/following::select[1]"
+        " | "
+        # 2) Любой элемент-виджет (div/button/input) рядом с текстом "Категория"
+        "//*[contains(normalize-space(),'Категория')]/following::*[self::div or self::button or self::input][1]"
+        ")[1]"
+    )
+
+    # Первая «живая» опция в открытом дропдауне категории
+    AD_CATEGORY_OPTION = (
+        By.XPATH,
+        "("
+        # 1) Обычный <select>
+        "//select[contains(@name,'category') or contains(@id,'category')]"
+        "/option[not(@disabled)][2]"
+        " | "
+        # 2) Кастомное выпадающее меню: div/li без disabled
+        "//div[contains(@class,'menu') or contains(@class,'list') or contains(@class,'option') or contains(@class,'dropdown')]"
+        "//*[self::div or self::li][not(contains(@class,'disabled'))][1]"
+        ")[1]"
+    )
+
+
+    # Радиобаттон "Новый" в блоке "Состояние товара"
+    AD_CONDITION_NEW = (
+        By.XPATH,
+        "//label[contains(normalize-space(),'Новый')]"
+    )
+
+    # Кнопка "Опубликовать"
+    AD_PUBLISH_BUTTON = (
+        By.XPATH,
+        "//button[normalize-space()='Опубликовать']"
     )
 
     # Заголовок объявления в блоке "Мои объявления"
