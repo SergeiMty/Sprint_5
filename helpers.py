@@ -54,3 +54,38 @@ def generate_random_email():
         random.choices(string.ascii_lowercase + string.digits, k=6)
     )
     return f"{TestDATA.RANDOM_EMAIL_PREFIX}{suffix}@{TestDATA.RANDOM_EMAIL_DOMAIN}"
+
+def open_registration_form(wait):
+    """Открыть модалку регистрации: 'Вход и регистрация' -> 'Нет аккаунта'."""
+    wait.until(
+        EC.element_to_be_clickable(Locators.ENTER_AND_REGISTRATION_BUTTON)
+    ).click()
+
+    wait.until(
+        EC.element_to_be_clickable(Locators.HAVE_NOT_ACCOUNT)
+    ).click()
+
+    wait.until(
+        EC.visibility_of_element_located(Locators.REGISTRATION_FORM)
+    )
+
+
+def fill_passwords(wait):
+    """Заполнить оба поля пароля одинаковым валидным значением."""
+    password_input = wait.until(
+        EC.visibility_of_element_located(Locators.PASSWORD_INPUT)
+    )
+    password_input.clear()
+    password_input.send_keys(TestDATA.PASSWORD)
+
+    password_confirm_input = wait.until(
+        EC.visibility_of_element_located(Locators.PASSWORD_CONFIRM_INPUT)
+    )
+    password_confirm_input.clear()
+    password_confirm_input.send_keys(TestDATA.PASSWORD)
+
+
+def assert_email_error(driver, wait):
+    """Дождаться текста 'Ошибка' под email (проще всего — по page_source)."""
+    wait.until(lambda d: TestDATA.ERROR_EMAIL in d.page_source)
+    assert TestDATA.ERROR_EMAIL in driver.page_source
